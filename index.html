@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive, hands-on retro terminal landing page introducing Web3, blockchains, smart contracts, NFTs, DAOs, and crypto economics for beginners.">
+  <meta name="theme-color" content="#0d1117">
+  <title>WEB3_TERMINAL // Interactive Decentralized Explorer</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/terminal-ui.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <!-- Keyboard Navigation Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main terminal</a>
+
+  <!-- Retro CRT Scanline & Vignette Texture Overlay -->
+  <div class="crt-overlay" aria-hidden="true"></div>
+
+  <!-- ==========================================================================
+       TOP NAVIGATION BAR
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo" aria-label="Web3 Terminal Home">
+        <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        <span>WEB3_TERMINAL<span class="brand-cursor">_</span></span>
+      </a>
+
+      <!-- Desktop Nav Menu -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#what-is-web3" class="nav-link">01.WhatIsWeb3</a></li>
+          <li><a href="#blockchain" class="nav-link">02.Blockchain</a></li>
+          <li><a href="#smart-contracts" class="nav-link">03.Contracts</a></li>
+          <li><a href="#crypto" class="nav-link">04.Crypto&Gas</a></li>
+          <li><a href="#nfts" class="nav-link">05.NFTs</a></li>
+          <li><a href="#daos" class="nav-link">06.DAOs</a></li>
+          <li><a href="#facts" class="nav-link">07.Facts</a></li>
+          <li><a href="#wallet" class="nav-link">08.Wallet</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav Utility Actions -->
+      <div class="nav-actions">
+        <button type="button" class="btn-util active" id="toggle-crt" title="Toggle retro CRT scanlines" aria-label="Toggle CRT Scanlines">
+          CRT: ON
+        </button>
+        <button type="button" class="btn-util" id="toggle-sound" title="Toggle 8-bit sound effects" aria-label="Toggle Sound Effects">
+          <span>🔇</span> SOUND: OFF
+        </button>
+        <button type="button" class="btn-terminal btn-terminal-sm" id="nav-connect-wallet" aria-label="Connect Web3 Wallet">
+          connect_wallet
+        </button>
+        <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================== -->
+  <main id="main-content">
+
+    <!-- ==========================================================================
+         HERO SECTION: HOOK & INTERACTIVE NETWORK SIMULATOR
+         ========================================================================== -->
+    <section class="hero-section" id="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge-wrap">
+            <span class="badge-retro green">● MAINNET SIMULATOR ONLINE</span>
+            <span class="badge-retro cyan">EIP-1193 READY</span>
+            <span class="badge-retro amber">ZERO REAL FUNDS REQUIRED</span>
+          </div>
+
+          <h1 class="hero-title" id="hero-title">
+            Who controls your data, your money, and your <span class="highlight-text">identity</span>?
+          </h1>
+
+          <p class="hero-description">
+            Today's web relies on centralized servers—single points of failure where giant corporations hold your records and charge gatekeeper rents. 
+            <strong>Web3 turns the network itself into an open, tamper-proof computer.</strong>
+          </p>
+
+          <div class="hero-actions">
+            <a href="#what-is-web3" class="btn-terminal btn-terminal-primary">
+              explore_network()
+            </a>
+            <a href="#blockchain" class="btn-terminal">
+              mine_first_block()
+            </a>
+          </div>
+
+          <div class="terminal-prompt-line" style="margin-top: var(--space-sm);">
+            <span class="prompt-user">guest@web3-explorer</span><span class="prompt-at">:</span><span class="prompt-path">~/genesis</span><span class="prompt-symbol">$</span>
+            <span>Click any node in the simulation to test network resilience</span>
+            <span class="cursor-blink"></span>
+          </div>
+        </div>
+
+        <!-- Interactive Canvas: Centralized vs Decentralized Simulator -->
+        <div class="network-sim-box">
+          <div class="terminal-header">
+            <div class="terminal-controls">
+              <span class="control-dot close"></span>
+              <span class="control-dot minimize"></span>
+              <span class="control-dot maximize"></span>
+            </div>
+            <span class="terminal-title">topology_visualizer.exe</span>
+            <span class="terminal-status-tag">
+              <span class="status-dot"></span> <span id="hud-active-nodes">8/8 ONLINE</span>
+            </span>
+          </div>
+
+          <div class="network-sim-controls">
+            <div class="sim-mode-toggle" role="group" aria-label="Network Architecture Selection">
+              <button type="button" class="btn-mode active" id="btn-mode-central">Centralized (Web2)</button>
+              <button type="button" class="btn-mode" id="btn-mode-decentral">Decentralized Mesh (Web3)</button>
+            </div>
+            <button type="button" class="btn-terminal btn-terminal-sm btn-terminal-danger" id="btn-kill-server">
+              Crash Central Server
+            </button>
+          </div>
+
+          <div class="canvas-wrapper">
+            <canvas id="network-canvas" aria-label="Interactive network topology graph demonstrating packet routing between nodes"></canvas>
+            <div class="sim-hud">
+              <span class="sim-hud-status" id="hud-network-status">CENTRALIZED (SINGLE POINT OF FAILURE)</span>
+              <span class="sim-hud-status">LATENCY: <strong id="hud-latency">18ms</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 01: WHAT IS WEB3? (EVOLUTION TIMELINE)
+         ========================================================================== -->
+    <section class="section-wrapper" id="what-is-web3" aria-labelledby="web3-evolution-title">
+      <div class="container reveal-on-scroll">
+        <div class="section-header-wrap">
+          <div class="section-tag">01 // EVOLUTION_OF_THE_WEB</div>
+          <h2 class="section-title" id="web3-evolution-title">From Read-Only to Sovereign Ownership</h2>
+          <p class="section-subtitle">
+            Web3 is not a redesign of website aesthetics—it is a fundamental shift in architecture from centralized servers to trustless, distributed networks.
+          </p>
+        </div>
+
+        <div class="evolution-grid">
+          <!-- Web 1.0 -->
+          <article class="evolution-card">
+            <div class="evolution-card-header">
+              <span class="era-tag">1990 - 2004</span>
+              <span class="badge-retro cyan">STATIC WEB</span>
+            </div>
+            <h3>Web 1.0: "Read"</h3>
+            <span class="paradigm-tag">Open Protocols (HTTP, SMTP)</span>
+            <p>
+              Users consumed static pages hosted on basic servers. Anyone could host a site, but content was strictly one-way with zero user interaction.
+            </p>
+            <ul class="evolution-list">
+              <li>Read-only content consumption</li>
+              <li>Decentralized open protocols</li>
+              <li>User owns their personal server</li>
+              <li>Zero algorithmic feeds</li>
+            </ul>
+          </article>
+
+          <!-- Web 2.0 -->
+          <article class="evolution-card">
+            <div class="evolution-card-header">
+              <span class="era-tag">2004 - PRESENT</span>
+              <span class="badge-retro amber">PLATFORM SILOS</span>
+            </div>
+            <h3>Web 2.0: "Read + Write"</h3>
+            <span class="paradigm-tag">Centralized Platforms (SaaS)</span>
+            <p>
+              Interactive social networks, cloud apps, and media platforms. Users create content, but giant corporations capture and monetize all personal data.
+            </p>
+            <ul class="evolution-list">
+              <li>Interactive social publishing</li>
+              <li>Data locked inside private server silos</li>
+              <li>Account deletion at platform whim</li>
+              <li>Revenue captured by platform owners</li>
+            </ul>
+          </article>
+
+          <!-- Web 3.0 -->
+          <article class="evolution-card current">
+            <div class="evolution-card-header">
+              <span class="era-tag">TODAY & BEYOND</span>
+              <span class="badge-retro green">SOVEREIGN NETWORK</span>
+            </div>
+            <h3>Web 3.0: "Read + Write + Own"</h3>
+            <span class="paradigm-tag">Verifiable Consensus (Blockchains)</span>
+            <p>
+              Decentralized state machines where users hold cryptographic keys to their data, money, identity, and governance rights without platform gatekeepers.
+            </p>
+            <ul class="evolution-list">
+              <li>Self-custodied cryptographic keys</li>
+              <li>Open, permissionless smart contracts</li>
+              <li>Censorship-resistant global ledger</li>
+              <li>Users participate in network governance</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 02: BLOCKCHAIN, EXPLAINED INTERACTIVELY
+         ========================================================================== -->
+    <section class="section-wrapper" id="blockchain" aria-labelledby="blockchain-title">
+      <div class="container reveal-on-scroll">
+        <div class="section-header-wrap">
+          <div class="section-tag">02 // CRYPTOGRAPHIC_LEDGER</div>
+          <h2 class="section-title" id="blockchain-title">Interactive Blockchain & Immutability Simulator</h2>
+          <p class="section-subtitle">
+            A blockchain is an append-only digital ledger. Each block packages transactions, records the exact hash of the previous block, and is sealed with a cryptographic signature. <strong>Tamper with one block, and the entire chain breaks.</strong>
+          </p>
+        </div>
+
+        <div class="blockchain-demo-container">
+          <!-- Control Action Bar -->
+          <div class="chain-action-bar">
+            <div class="chain-input-group">
+              <label for="block-data-input" class="sr-only">Block Payload Data</label>
+              <input type="text" id="block-data-input" class="terminal-input" placeholder="Enter memo: e.g. Alice -> Bob: 1.5 ETH" aria-label="Transaction payload for new block">
+              <button type="button" class="btn-terminal btn-terminal-primary" id="btn-mine-block">
+                mine_block()
+              </button>
+            </div>
+
+            <div class="chain-controls-right">
+              <button type="button" class="btn-terminal btn-terminal-danger" id="btn-tamper-chain" title="Alter data in Block #1 to watch the chain break">
+                Tamper Block #1
+              </button>
+              <button type="button" class="btn-terminal" id="btn-restore-chain" title="Recalculate consensus and restore integrity">
+                Restore Consensus
+              </button>
+            </div>
+          </div>
+
+          <!-- Horizontal Scrollable Chain Track -->
+          <div class="chain-scroll-viewport" tabindex="0" aria-label="Horizontally scrollable blockchain visualizer">
+            <div class="chain-track" id="chain-track">
+              <!-- Dynamically populated by chain-demo.js -->
+            </div>
+          </div>
+
+          <!-- Terminal Execution Log -->
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <div class="terminal-controls">
+                <span class="control-dot close"></span>
+                <span class="control-dot minimize"></span>
+                <span class="control-dot maximize"></span>
+              </div>
+              <span class="terminal-title">sha256_consensus.log</span>
+              <span class="badge-retro cyan">LIVE CONSOLE</span>
+            </div>
+            <div class="terminal-log-box" id="chain-terminal-log" role="log" aria-live="polite">
+              <!-- Dynamic log stream -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 03: SMART CONTRACTS (THE VENDING MACHINE)
+         ========================================================================== -->
+    <section class="section-wrapper" id="smart-contracts" aria-labelledby="contracts-title">
+      <div class="container reveal-on-scroll">
+        <div class="section-header-wrap">
+          <div class="section-tag">03 // AUTONOMOUS_LOGIC</div>
+          <h2 class="section-title" id="contracts-title">Smart Contracts: The Cryptographic Vending Machine</h2>
+          <p class="section-subtitle">
+            In 1996, computer scientist Nick Szabo described smart contracts using a vending machine: if you deposit coins and select an item, hardware logic guarantees delivery without needing a human cashier. On-chain, code replaces the cashier with mathematically enforced rules.
+          </p>
+        </div>
+
+        <div class="smart-contracts-grid">
+          <!-- Code Terminal Pane with Line Highlighting -->
+          <div class="code-terminal-pane">
+            <div class="terminal-header">
+              <div class="terminal-controls">
+                <span class="control-dot close"></span>
+                <span class="control-dot minimize"></span>
+                <span class="control-dot maximize"></span>
+              </div>
+              <span class="terminal-title">Web3VendingMachine.sol</span>
+              <span class="badge-retro green">SOLIDITY ^0.8.20</span>
+            </div>
+
+            <pre class="solidity-code"><code><span class="syn-comment">// SPDX-License-Identifier: MIT</span>
+<span class="syn-keyword">contract</span> <span class="syn-type">Web3VendingMachine</span> {
+  <span class="syn-comment">// Deterministic on-chain logic: No middleman required</span>
+  <span class="code-line" id="sol-line-1"><span class="syn-keyword">function</span> <span class="syn-func">purchase</span>(<span class="syn-type">uint256</span> itemId) <span class="syn-keyword">external payable</span> {</span>
+  <span class="code-line" id="sol-line-2">    <span class="syn-keyword">require</span>(itemStock[itemId] &gt; <span class="syn-number">0</span>, <span class="syn-string">"Out of stock"</span>);</span>
+  <span class="code-line" id="sol-line-3">    <span class="syn-keyword">require</span>(msg.value &gt;= itemPrices[itemId], <span class="syn-string">"Insufficient ETH"</span>);</span>
+  <span class="code-line" id="sol-line-4">    itemStock[itemId] -= <span class="syn-number">1</span>; <span class="syn-comment">// Update state</span></span>
+  <span class="code-line" id="sol-line-5">    transferToken(msg.sender, itemId);</span>
+  <span class="code-line" id="sol-line-6">    <span class="syn-keyword">if</span> (msg.value &gt; price) refund(msg.value - price);</span>
+  <span class="code-line" id="sol-line-7">    <span class="syn-keyword">emit</span> <span class="syn-func">ItemDispensed</span>(msg.sender, itemId);</span>
+  <span class="code-line" id="sol-line-8">  }</span>
+}</code></pre>
+          </div>
+
+          <!-- Interactive Vending Machine Hardware UI -->
+          <div class="vending-interface">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <h3 style="font-size: 1.15rem; color: var(--text-bright);">Select Tokenized Item</h3>
+              <span class="badge-retro cyan">AUTONOMOUS DISPENSER</span>
+            </div>
+
+            <!-- Item selection buttons -->
+            <div class="vending-shelf" id="vending-shelf">
+              <!-- Rendered dynamically by smart-contract.js -->
+            </div>
+
+            <!-- Payment Controls -->
+            <div class="vending-payment-row">
+              <div>
+                <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Deposited Value (msg.value)</div>
+                <div class="payment-eth-display" id="deposited-eth-val">0.02 ETH</div>
+              </div>
+              <div style="display: flex; gap: 6px;">
+                <button type="button" class="btn-terminal btn-terminal-sm" id="btn-add-01">+0.01 ETH</button>
+                <button type="button" class="btn-terminal btn-terminal-sm" id="btn-add-02">+0.02 ETH</button>
+                <button type="button" class="btn-terminal btn-terminal-sm" id="btn-reset-eth">Reset</button>
+              </div>
+            </div>
+
+            <!-- Execution Action -->
+            <button type="button" class="btn-terminal btn-terminal-primary" id="btn-execute-contract" style="width: 100%; padding: 0.8rem;">
+              execute_contract()
+            </button>
+
+            <!-- Execution Trace Log -->
+            <div class="terminal-log-box" id="contract-terminal-log" style="max-height: 120px;" role="log" aria-live="polite">
+              <!-- Logs populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 04: CRYPTOCURRENCIES & GAS ESTIMATOR
+         ========================================================================== -->
+    <section class="section-wrapper" id="crypto" aria-labelledby="crypto-title">
+      <div class="container reveal-on-scroll">
+        <div class="section-header-wrap">
+          <div class="section-tag">04 // INCENTIVE_ECONOMICS</div>
+          <h2 class="section-title" id="crypto-title">Cryptocurrencies & Network Gas: Digital Fuel</h2>
+          <p class="section-subtitle">
+            Cryptocurrencies are not get-rich-quick tickets. They are native digital assets designed to pay for computation (Gas) and economically incentivize tens of thousands of independent node operators to stay online and secure the network.
+          </p>
+        </div>
+
+        <div class="crypto-grid">
+          <!-- Traditional Banking vs Web3 Comparison -->
+          <div class="comparison-table-wrap">
+            <h3 style="font-size: 1.15rem; color: var(--text-bright);">System Architecture Comparison</h3>
+            
+            <div class="compare-row compare-header">
+              <span>Dimension</span>
+              <span>Traditional Banking</span>
+              <span>Public Blockchain</span>
+            </div>
+
+            <div class="compare-row">
+              <span>Settlement Time</span>
+              <span style="color: var(--text-muted);">1-3 Business Days</span>
+              <span style="color: var(--phosphor-green);">12 - 60 Seconds</span>
+            </div>
+
+            <div class="compare-row">
+              <span>Custody Model</span>
+              <span style="color: var(--text-muted);">Bank holds legal title</span>
+              <span style="color: var(--phosphor-green);">Self-custody via Private Key</span>
+            </div>
+
+            <div class="compare-row">
+              <span>Auditability</span>
+              <span style="color: var(--text-muted);">Quarterly closed reports</span>
+              <span style="color: var(--phosphor-green);">100% Real-time public ledger</span>
+            </div>
+
+            <div class="compare-row">
+              <span>Market Hours</span>
+              <span style="color: var(--text-muted);">Mon-Fri 9:00 - 17:00</span>
+              <span style="color: var(--phosphor-green);">24/7/365 Non-stop</span>
+            </div>
+
+            <div class="compare-row">
+              <span>Volatility & Risk</span>
+              <span style="color: var(--text-muted);">FDIC Insured / Inflation risk</span>
+              <span style="color: var(--phosphor-amber);">High volatility / Code risk</span>
+            </div>
+          </div>
+
+          <!-- Interactive Gas Fee Calculator -->
+          <div class="gas-calc-box">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <h3 style="font-size: 1.15rem; color: var(--text-bright);">Interactive Gas Fee Simulator</h3>
+              <span class="badge-retro amber">EIP-1559 MODEL</span>
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
+              Every operation costs computational steps. More complex smart contracts consume more "Gas Units," priced in Gwei (1 Gwei = 10⁻⁹ ETH).
+            </p>
+
+            <!-- Transaction Type Selection -->
+            <div class="gas-selector-group">
+              <span class="field-label">1. SELECT TRANSACTION COMPLEXITY</span>
+              <div class="gas-pill-options">
+                <button type="button" class="btn-pill-choice active" data-gas-tx="21000">Simple Transfer (21k)</button>
+                <button type="button" class="btn-pill-choice" data-gas-tx="150000">DEX Token Swap (150k)</button>
+                <button type="button" class="btn-pill-choice" data-gas-tx="220000">NFT Contract Mint (220k)</button>
+              </div>
+            </div>
+
+            <!-- Network Congestion Selection -->
+            <div class="gas-selector-group">
+              <span class="field-label">2. NETWORK CONGESTION (BASE FEE)</span>
+              <div class="gas-pill-options">
+                <button type="button" class="btn-pill-choice" data-gas-gwei="12">Low Traffic (12 Gwei)</button>
+                <button type="button" class="btn-pill-choice active" data-gas-gwei="25">Normal (25 Gwei)</button>
+                <button type="button" class="btn-pill-choice" data-gas-gwei="70">Congested Spike (70 Gwei)</button>
+              </div>
+            </div>
+
+            <!-- Live Calculation Readout -->
+            <div class="gas-calc-readout">
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem;">
+                <span style="color: var(--text-muted);">Gas Formula:</span>
+                <span id="gas-formula-detail" style="font-family: var(--font-mono); color: var(--text-main);">21,000 × 25 Gwei</span>
+              </div>
+              <div class="gas-total-row">
+                <span style="color: var(--text-bright); font-weight: 600;">Estimated Network Fee:</span>
+                <div style="text-align: right;">
+                  <div class="gas-total-value" id="gas-total-eth">0.000525 ETH</div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted);" id="gas-total-usd">~$1.58 USD</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 05: NFTS & DIGITAL PROVENANCE
+         ========================================================================== -->
+    <section class="section-wrapper" id="nfts" aria-labelledby="nfts-title">
+      <div class="container reveal-on-scroll">
+        <div class="section-header-wrap">
+          <div class="section-tag">05 // UNIQUE_ASSETS</div>
+          <h2 class="section-title" id="nfts-title">NFTs: Verifiable Digital Provenance</h2>
+          <p class="section-subtitle">
+            While cryptocurrencies like ETH are fungible (each unit is interchangeable), Non-Fungible Tokens (ERC-721) represent unique, tamper-proof ownership titles for digital art, credentials, domain names, or physical assets.
+          </p>
+        </div>
+
+        <div class="nft-gallery-grid" id="nft-gallery-grid">
+          <!-- Rendered dynamically by token-nft.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 06: DAOS (DECENTRALIZED AUTONOMOUS ORGANIZATIONS)
+         ========================================================================== -->
+    <section class="section-wrapper" id="daos" aria-labelledby="daos-title">
+      <div class="container reveal-on-scroll">
+        <div class="section-header-wrap">
+          <div class="section-tag">06 // COMMUNITY_GOVERNANCE</div>
+          <h2 class="section-title" id="daos-title">DAOs: Organizations Governed by Code</h2>
+          <p class="section-subtitle">
+            A Decentralized Autonomous Organization has no CEO or central board of directors. Governance rules and treasury allocations are written into smart contracts. Community members submit proposals and vote transparently with governance tokens.
+          </p>
+        </div>
+
+        <div class="dao-governance-box">
+          <div class="dao-status-bar">
+            <div>
+              <span class="badge-retro green">● DAO TREASURY: $250,000 USDC</span>
+              <span style="margin-left: 8px; color: var(--text-muted);">Protocol: OpenGov v2</span>
+            </div>
+            <div style="color: var(--phosphor-cyan); font-weight: 600;">
+              Your Simulated Power: 100 $GOV
+            </div>
+          </div>
+
+          <div class="proposals-list" id="proposals-list">
+            <!-- Rendered dynamically by dao-voting.js -->
+          </div>
+
+          <!-- DAO Terminal Event Log -->
+          <div class="terminal-log-box" id="dao-terminal-log" style="border-radius: 0; border-left: none; border-right: none; border-bottom: none; max-height: 110px;" role="log" aria-live="polite">
+            <!-- Event stream -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 07: QUICK-FACT CAROUSEL (TERMINAL LOG EXPLORER)
+         ========================================================================== -->
+    <section class="section-wrapper" id="facts" aria-labelledby="facts-title">
+      <div class="container reveal-on-scroll">
+        <div class="section-header-wrap">
+          <div class="section-tag">07 // LOG_ARCHIVES</div>
+          <h2 class="section-title" id="facts-title">Web3 Insights & Surprising Discoveries</h2>
+          <p class="section-subtitle">
+            Bite-sized, verified milestones and paradigm shifts that shaped the decentralized frontier.
+          </p>
+        </div>
+
+        <div class="carousel-container" id="facts-carousel-container" tabindex="0" aria-roledescription="carousel" aria-label="Web3 Facts Carousel">
+          <div class="terminal-header">
+            <div class="terminal-controls">
+              <span class="control-dot close"></span>
+              <span class="control-dot minimize"></span>
+              <span class="control-dot maximize"></span>
+            </div>
+            <span class="terminal-title">facts_db.log</span>
+            <span class="badge-retro cyan" id="carousel-counter">[01/06]</span>
+          </div>
+
+          <div class="carousel-viewport" id="carousel-viewport" aria-live="polite">
+            <!-- Rendered dynamically by fact-carousel.js -->
+          </div>
+
+          <div class="carousel-controls">
+            <div class="carousel-dots" id="carousel-dots" aria-label="Slide indicators">
+              <!-- Dots rendered dynamically -->
+            </div>
+
+            <div style="display: flex; gap: var(--space-xs);">
+              <button type="button" class="btn-terminal btn-terminal-sm" id="carousel-btn-prev" aria-label="Previous Slide">
+                &lt; PREV_LOG
+              </button>
+              <button type="button" class="btn-terminal btn-terminal-sm" id="carousel-btn-next" aria-label="Next Slide">
+                NEXT_LOG &gt;
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 08: WALLET CONNECT PLAYGROUND (10% BONUS FEATURE)
+         ========================================================================== -->
+    <section class="section-wrapper" id="wallet" aria-labelledby="wallet-title">
+      <div class="container reveal-on-scroll">
+        <div class="section-header-wrap">
+          <div class="section-tag">08 // EIP_1193_INTEGRATION</div>
+          <h2 class="section-title" id="wallet-title">Web3 Wallet Playground: Cryptographic Identity</h2>
+          <p class="section-subtitle">
+            Your wallet is not a cloud account—it is a non-custodial cryptographic keypair manager. It signs transactions on your behalf without ever leaking your private key to any website.
+          </p>
+        </div>
+
+        <div class="wallet-console-grid">
+          <!-- Main Wallet Card -->
+          <div class="wallet-card-main">
+            <div class="wallet-status-banner">
+              <div>
+                <span class="field-label">CONNECTION STATUS</span>
+                <div style="margin-top: 4px;">
+                  <span class="badge-retro amber" id="wallet-status-pill">● DISCONNECTED</span>
+                </div>
+              </div>
+              <div class="sim-switch-wrap">
+                <input type="checkbox" id="wallet-sim-toggle" style="cursor: pointer; accent-color: var(--phosphor-green);">
+                <label for="wallet-sim-toggle" style="cursor: pointer;">Simulated Wallet Mode (No MetaMask needed)</label>
+              </div>
+            </div>
+
+            <div class="wallet-details-table">
+              <div class="wallet-row">
+                <span class="wallet-row-label">Public Address (EIP-55):</span>
+                <span class="wallet-row-val hash-text" id="wallet-address-display">Not Connected</span>
+              </div>
+              <div class="wallet-row">
+                <span class="wallet-row-label">Connected Network:</span>
+                <span class="wallet-row-val" id="wallet-network-display">N/A</span>
+              </div>
+              <div class="wallet-row">
+                <span class="wallet-row-label">Account Balance:</span>
+                <span class="wallet-row-val" id="wallet-balance-display">N/A</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+              <button type="button" class="btn-terminal btn-terminal-primary" id="btn-connect-wallet-main">
+                &gt; connect_wallet
+              </button>
+            </div>
+          </div>
+
+          <!-- Terminal Log Console for Wallet Events -->
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <div class="terminal-controls">
+                <span class="control-dot close"></span>
+                <span class="control-dot minimize"></span>
+                <span class="control-dot maximize"></span>
+              </div>
+              <span class="terminal-title">eip1193_provider.log</span>
+              <span class="badge-retro green">CLIENT_SIDE</span>
+            </div>
+            <div class="terminal-log-box" id="wallet-terminal-log" style="height: 185px;" role="log" aria-live="polite">
+              <div class="log-entry">
+                <span class="log-time">[00:00:00]</span>
+                <span class="log-info">Ready for EIP-1193 provider requests (window.ethereum).</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       MODAL: NO WALLET EXTENSION FOUND (FRIENDLY FALLBACK)
+       ========================================================================== -->
+  <div id="wallet-install-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 9999; align-items: center; justify-content: center; padding: var(--space-md);" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="terminal-window" style="max-width: 480px; width: 100%;">
+      <div class="terminal-header">
+        <div class="terminal-controls">
+          <span class="control-dot close" id="modal-close-btn" style="cursor: pointer;" title="Close modal"></span>
+          <span class="control-dot minimize"></span>
+          <span class="control-dot maximize"></span>
+        </div>
+        <span class="terminal-title">provider_not_found.alert</span>
+        <span class="badge-retro red">404 PROVIDER</span>
+      </div>
+      <div class="terminal-body">
+        <h3 id="modal-title" style="margin-bottom: var(--space-xs); color: var(--phosphor-amber);">No Web3 Extension Detected</h3>
+        <p style="font-size: 0.9rem; margin-bottom: var(--space-md);">
+          To interact directly with decentralized networks, your browser requires an EIP-1193 compatible provider like MetaMask, Rabby, or Coinbase Wallet.
+        </p>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: var(--space-md);">
+          💡 <strong>Tip for Testing:</strong> You can also check the <em>"Simulated Wallet Mode"</em> toggle in the playground to test the entire account connection workflow without installing anything!
+        </p>
+        <div style="display: flex; gap: var(--space-xs); justify-content: flex-end;">
+          <a href="https://metamask.io/download/" target="_blank" rel="noopener noreferrer" class="btn-terminal btn-terminal-primary">
+            Install MetaMask
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-bright);">
+          WEB3_TERMINAL<span style="color: var(--phosphor-green);">_</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+          An open-source interactive education platform built with vanilla HTML, CSS, and JavaScript. Designed to teach foundational Web3 principles through hands-on mechanics.
+        </p>
+        <div class="footer-disclaimer">
+          ⚠️ <strong>EDUCATIONAL SANDBOX:</strong> All blockchain mining, voting, and token transactions on this page are client-side simulations. This website does not offer financial advice or facilitate real-money investments.
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Documentation</div>
+        <ul class="footer-links">
+          <li><a href="https://ethereum.org/en/developers/docs/" target="_blank" rel="noopener noreferrer">Ethereum Docs</a></li>
+          <li><a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener noreferrer">Bitcoin Whitepaper</a></li>
+          <li><a href="https://eips.ethereum.org/EIPS/eip-1193" target="_blank" rel="noopener noreferrer">EIP-1193 Specification</a></li>
+          <li><a href="https://docs.ipfs.tech/" target="_blank" rel="noopener noreferrer">IPFS Documentation</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Terminal Controls</div>
+        <ul class="footer-links">
+          <li><a href="#hero">Back to Top</a></li>
+          <li><a href="#blockchain">Mine Blocks</a></li>
+          <li><a href="#smart-contracts">Vending Machine</a></li>
+          <li><a href="#wallet">Wallet Connect</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>
+        Built for the Web3 Interactive Challenge // Zero External Dependencies
+      </div>
+      <div>
+        Status: <span style="color: var(--phosphor-green);">100% Client-Side Consensus</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts Loaded in Order -->
+  <script src="js/audio-effects.js"></script>
+  <script src="js/network-sim.js"></script>
+  <script src="js/chain-demo.js"></script>
+  <script src="js/smart-contract.js"></script>
+  <script src="js/token-nft.js"></script>
+  <script src="js/dao-voting.js"></script>
+  <script src="js/fact-carousel.js"></script>
+  <script src="js/wallet-connect.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
