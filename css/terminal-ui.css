@@ -1,0 +1,393 @@
+/* ==========================================================================
+   TERMINAL UI COMPONENTS & DESIGN SYSTEM
+   Retro Computer Terminal Framings, Controls, Prompts, Buttons, & Badges
+   ========================================================================== */
+
+/* Terminal Window Frame */
+.terminal-window {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-panel);
+  overflow: hidden;
+  position: relative;
+  transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.terminal-window:hover,
+.terminal-window:focus-within {
+  border-color: var(--border-strong);
+}
+
+.terminal-window.highlight-green {
+  border-color: rgba(63, 185, 80, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 16px rgba(63, 185, 80, 0.15);
+}
+
+.terminal-window.highlight-cyan {
+  border-color: rgba(88, 166, 255, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 16px rgba(88, 166, 255, 0.15);
+}
+
+/* Terminal Header / Titlebar */
+.terminal-header {
+  background: var(--bg-terminal-bar);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  user-select: none;
+}
+
+.terminal-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.control-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.control-dot.close { background: #f85149; }
+.control-dot.minimize { background: #d29922; }
+.control-dot.maximize { background: #3fb950; }
+
+.terminal-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.terminal-title::before {
+  content: "$";
+  color: var(--phosphor-green);
+  font-weight: bold;
+}
+
+.terminal-status-tag {
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: rgba(63, 185, 80, 0.12);
+  color: var(--phosphor-green);
+  border: 1px solid rgba(63, 185, 80, 0.3);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* Terminal Body Content */
+.terminal-body {
+  padding: var(--space-lg);
+  position: relative;
+}
+
+/* Prompt Line */
+.terminal-prompt-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: var(--space-sm);
+  font-weight: 500;
+  flex-wrap: wrap;
+}
+
+.prompt-user {
+  color: var(--phosphor-cyan);
+}
+
+.prompt-at {
+  color: var(--text-muted);
+}
+
+.prompt-path {
+  color: var(--phosphor-amber);
+}
+
+.prompt-symbol {
+  color: var(--phosphor-green);
+  font-weight: bold;
+}
+
+/* Blinking Cursor */
+.cursor-blink {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.15em;
+  background: var(--phosphor-green);
+  vertical-align: middle;
+  margin-left: 2px;
+  animation: cursor-flicker 1s infinite step-end;
+}
+
+@keyframes cursor-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ==========================================================================
+   BUTTONS & INTERACTIVE CONTROLS
+   ========================================================================== */
+
+.btn-terminal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: 0.65rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--bg-tertiary);
+  color: var(--text-bright);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  user-select: none;
+}
+
+.btn-terminal::before {
+  content: ">";
+  color: var(--phosphor-green);
+  font-weight: 700;
+  transition: transform var(--transition-fast);
+}
+
+.btn-terminal:hover {
+  background: var(--border-strong);
+  border-color: var(--phosphor-green);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(63, 185, 80, 0.2);
+  text-decoration: none;
+}
+
+.btn-terminal:hover::before {
+  transform: translateX(2px);
+}
+
+.btn-terminal:focus-visible {
+  outline: 2px solid var(--phosphor-green);
+  outline-offset: 2px;
+}
+
+.btn-terminal:active {
+  transform: translateY(1px);
+}
+
+.btn-terminal-primary {
+  background: rgba(63, 185, 80, 0.15);
+  border-color: var(--phosphor-green);
+  color: var(--phosphor-green);
+}
+
+.btn-terminal-primary:hover {
+  background: var(--phosphor-green);
+  color: #0d1117;
+  box-shadow: var(--glow-green);
+}
+
+.btn-terminal-primary:hover::before {
+  color: #0d1117;
+}
+
+.btn-terminal-danger {
+  border-color: var(--phosphor-red);
+  color: var(--phosphor-red);
+  background: rgba(248, 81, 73, 0.1);
+}
+
+.btn-terminal-danger::before {
+  content: "!";
+  color: var(--phosphor-red);
+}
+
+.btn-terminal-danger:hover {
+  background: var(--phosphor-red);
+  color: #0d1117;
+  box-shadow: 0 0 12px rgba(248, 81, 73, 0.4);
+}
+
+.btn-terminal-danger:hover::before {
+  color: #0d1117;
+}
+
+.btn-terminal-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   SECTION HEADERS
+   ========================================================================== */
+
+.section-header-wrap {
+  margin-bottom: var(--space-xl);
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--phosphor-cyan);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+}
+
+.section-tag::before {
+  content: "//";
+  color: var(--text-muted);
+}
+
+.section-tag::after {
+  content: "//";
+  color: var(--text-muted);
+}
+
+.section-title {
+  margin-bottom: var(--space-sm);
+  color: var(--text-bright);
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: var(--max-ch);
+}
+
+/* ==========================================================================
+   TERMINAL BADGES & HASH PILLS
+   ========================================================================== */
+
+.badge-retro {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.badge-retro.green {
+  border-color: rgba(63, 185, 80, 0.4);
+  color: var(--phosphor-green);
+  background: rgba(63, 185, 80, 0.1);
+}
+
+.badge-retro.cyan {
+  border-color: rgba(88, 166, 255, 0.4);
+  color: var(--phosphor-cyan);
+  background: rgba(88, 166, 255, 0.1);
+}
+
+.badge-retro.amber {
+  border-color: rgba(210, 153, 34, 0.4);
+  color: var(--phosphor-amber);
+  background: rgba(210, 153, 34, 0.1);
+}
+
+.badge-retro.red {
+  border-color: rgba(248, 81, 73, 0.4);
+  color: var(--phosphor-red);
+  background: rgba(248, 81, 73, 0.1);
+}
+
+.hash-pill {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  background: var(--bg-code-block);
+  border: 1px solid var(--border-subtle);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  color: var(--phosphor-cyan);
+  letter-spacing: 0.02em;
+  word-break: break-all;
+}
+
+/* ==========================================================================
+   TERMINAL LOG CONSOLE
+   ========================================================================== */
+
+.terminal-log-box {
+  background: var(--bg-code-block);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  font-size: 0.82rem;
+  max-height: 200px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.log-entry {
+  display: flex;
+  gap: var(--space-xs);
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.log-time {
+  color: var(--text-muted);
+  opacity: 0.7;
+  user-select: none;
+}
+
+.log-info { color: var(--text-main); }
+.log-success { color: var(--phosphor-green); }
+.log-warn { color: var(--phosphor-amber); }
+.log-error { color: var(--phosphor-red); }
+
+/* Animated Typewriter Cursor Container */
+.typewriter-text {
+  display: inline;
+}
+
+/* Reveal transition on scroll */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}

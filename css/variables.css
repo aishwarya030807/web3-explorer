@@ -1,0 +1,87 @@
+/* ==========================================================================
+   DESIGN TOKENS & CSS CUSTOM PROPERTIES
+   Theme: Retro Computer Terminal (High-Contrast & Eye-Comfort Edition)
+   WCAG AA/AAA Compliant: Contrast ratio > 7:1 for body copy
+   ========================================================================== */
+
+:root {
+  /* Surface & Background Colors */
+  --bg-primary: #0d1117;          /* Softened dark charcoal, avoids pure #000 eye strain */
+  --bg-secondary: #131822;        /* Dark slate surface for terminal panels */
+  --bg-tertiary: #1b2230;         /* Highlighted card / active element surface */
+  --bg-elevated: #21293a;         /* Elevated modals / tooltips */
+  --bg-terminal-bar: #161c27;     /* Terminal window title bar */
+  --bg-code-block: #0a0e14;       /* Deep sunken terminal code display */
+
+  /* Borders & Dividers */
+  --border-subtle: #242f40;       /* Muted panel border */
+  --border-strong: #384860;       /* Focused / active border */
+  --border-terminal: #1f6feb33;   /* Terminal accent border */
+
+  /* Primary Phosphor Accents (Use for highlights, badges, prompts, cursor) */
+  --phosphor-green: #3fb950;      /* Terminal phosphor green */
+  --phosphor-green-glow: rgba(63, 185, 80, 0.25);
+  --phosphor-green-dim: #238636;
+  --phosphor-cyan: #58a6ff;       /* Terminal system cyan */
+  --phosphor-cyan-glow: rgba(88, 166, 255, 0.25);
+  --phosphor-amber: #d29922;      /* Terminal warning / gas amber */
+  --phosphor-amber-glow: rgba(210, 153, 34, 0.25);
+  --phosphor-red: #f85149;        /* Chain broken / error red */
+  --phosphor-red-glow: rgba(248, 81, 73, 0.3);
+  --phosphor-purple: #bc8cff;     /* Token / NFT special accent */
+
+  /* Typography & Readability (WCAG AAA compliant against --bg-primary) */
+  --text-main: #c9d1d9;           /* Soft muted white/mint body text (~11.5:1 contrast) */
+  --text-bright: #f0f6fc;         /* Bold headings, emphasized keywords */
+  --text-muted: #8b949e;          /* Secondary captions, timestamps (~4.8:1 contrast) */
+  --text-terminal: #7ee787;       /* Terminal prompt green for CLI output */
+  --text-command: #79c0ff;        /* Command highlight blue */
+
+  /* Font Stacks */
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', 'Fira Code', 'Courier New', monospace;
+  --font-display: 'JetBrains Mono', monospace;
+
+  /* Line Heights & Lengths */
+  --leading-normal: 1.65;
+  --leading-relaxed: 1.8;
+  --leading-tight: 1.3;
+  --max-ch: 72ch;                 /* Optimal readability for monospaced fonts */
+
+  /* Spacing Scale */
+  --space-2xs: 0.25rem;   /* 4px */
+  --space-xs: 0.5rem;     /* 8px */
+  --space-sm: 0.75rem;    /* 12px */
+  --space-md: 1rem;       /* 16px */
+  --space-lg: 1.5rem;     /* 24px */
+  --space-xl: 2rem;       /* 32px */
+  --space-2xl: 3rem;      /* 48px */
+  --space-3xl: 4.5rem;    /* 72px */
+
+  /* Border Radii (Subtle retro-digital curvature) */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Shadows & Glow Effects */
+  --glow-green: 0 0 12px rgba(63, 185, 80, 0.35);
+  --glow-cyan: 0 0 12px rgba(88, 166, 255, 0.35);
+  --glow-amber: 0 0 12px rgba(210, 153, 34, 0.35);
+  --shadow-panel: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border-subtle);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* CRT Filter Variables */
+  --crt-scanline-opacity: 0.04;
+  --crt-vignette-opacity: 0.35;
+}
+
+/* High Contrast Accessibility Override */
+[data-high-contrast="true"] {
+  --bg-primary: #05070a;
+  --bg-secondary: #0c1017;
+  --border-subtle: #4a5c78;
+  --text-main: #ffffff;
+  --text-muted: #abb2bf;
+}
