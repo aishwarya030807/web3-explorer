@@ -1,0 +1,164 @@
+/* ==========================================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   Mobile (< 768px), Tablet (768px - 1024px), Desktop (> 1024px)
+   ========================================================================== */
+
+/* Tablet Breakpoint (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .smart-contracts-grid,
+  .crypto-grid,
+  .wallet-console-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .evolution-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nft-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Mobile Breakpoint (max-width: 768px) */
+@media (max-width: 768px) {
+  :root {
+    --space-2xl: 2rem;
+    --space-3xl: 3rem;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-subtle);
+    flex-direction: column;
+    padding: var(--space-md);
+    gap: var(--space-xs);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn-terminal {
+    width: 100%;
+  }
+
+  .canvas-wrapper {
+    height: 260px;
+  }
+
+  .evolution-grid,
+  .nft-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chain-action-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .chain-input-group {
+    max-width: 100%;
+  }
+
+  .chain-controls-right {
+    justify-content: flex-start;
+  }
+
+  .block-card {
+    width: 270px;
+  }
+
+  .vending-shelf {
+    grid-template-columns: 1fr;
+  }
+
+  .compare-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 0.8rem 0;
+  }
+
+  .compare-header {
+    display: none;
+  }
+
+  .compare-row span:nth-child(1) {
+    font-weight: 700;
+    color: var(--phosphor-green);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+
+  .terminal-header {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .terminal-title {
+    font-size: 0.75rem;
+  }
+}
+
+/* Small Mobile Screen (< 480px) */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.85rem;
+  }
+
+  .network-sim-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sim-mode-toggle {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .btn-mode {
+    flex: 1;
+    text-align: center;
+  }
+
+  .vending-payment-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

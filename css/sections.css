@@ -1,0 +1,1076 @@
+/* ==========================================================================
+   SECTIONS STYLING
+   Layouts, Interactive Component Displays, and Retro Terminal Aesthetics
+   ========================================================================== */
+
+/* ==========================================================================
+   SITE HEADER & NAVIGATION
+   ========================================================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 8000;
+  background: rgba(13, 17, 23, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: all var(--transition-smooth);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem var(--space-md);
+  gap: var(--space-md);
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--text-bright);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.brand-icon {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--phosphor-green);
+  stroke-width: 2;
+}
+
+.brand-cursor {
+  color: var(--phosphor-green);
+  animation: cursor-flicker 1s infinite step-end;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--phosphor-green);
+  background: rgba(63, 185, 80, 0.08);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* Header utility buttons (CRT Toggle, Audio Toggle) */
+.btn-util {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all var(--transition-fast);
+}
+
+.btn-util:hover {
+  border-color: var(--text-main);
+  color: var(--text-bright);
+}
+
+.btn-util.active {
+  border-color: var(--phosphor-green);
+  color: var(--phosphor-green);
+  background: rgba(63, 185, 80, 0.1);
+}
+
+/* Mobile Nav Toggle */
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  font-size: 1.25rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   HERO / HOOK SECTION
+   ========================================================================== */
+
+.hero-section {
+  padding: var(--space-3xl) 0 var(--space-2xl);
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.hero-badge-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 3.8vw + 1rem, 3.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.hero-title .highlight-text {
+  color: var(--phosphor-green);
+  text-shadow: var(--glow-green);
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  color: var(--text-main);
+  line-height: var(--leading-relaxed);
+  max-width: 60ch;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* Network Simulator Canvas Box */
+.network-sim-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-panel);
+}
+
+.network-sim-controls {
+  padding: 0.75rem var(--space-md);
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.sim-mode-toggle {
+  display: flex;
+  gap: 4px;
+}
+
+.btn-mode {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-primary);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-mode.active {
+  background: rgba(63, 185, 80, 0.15);
+  border-color: var(--phosphor-green);
+  color: var(--phosphor-green);
+  font-weight: 600;
+}
+
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  background: radial-gradient(circle at center, #141b26 0%, #0a0d14 100%);
+  cursor: crosshair;
+}
+
+#network-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sim-hud {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.sim-hud-status {
+  background: rgba(13, 17, 23, 0.85);
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid var(--border-subtle);
+}
+
+/* ==========================================================================
+   WHAT IS WEB3 SECTION (EVOLUTION OF THE WEB)
+   ========================================================================== */
+
+.section-wrapper {
+  padding: var(--space-3xl) 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.evolution-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.evolution-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  position: relative;
+  transition: all var(--transition-smooth);
+}
+
+.evolution-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+}
+
+.evolution-card.current {
+  border-color: rgba(63, 185, 80, 0.4);
+  box-shadow: 0 8px 24px rgba(63, 185, 80, 0.1);
+}
+
+.evolution-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.era-tag {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.era-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--phosphor-green);
+}
+
+.evolution-card h3 {
+  font-size: 1.25rem;
+}
+
+.paradigm-tag {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  background: var(--bg-tertiary);
+  color: var(--phosphor-cyan);
+  width: fit-content;
+}
+
+.evolution-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.evolution-list li::before {
+  content: "» ";
+  color: var(--phosphor-green);
+}
+
+/* ==========================================================================
+   BLOCKCHAIN SIMULATOR SECTION
+   ========================================================================== */
+
+.blockchain-demo-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.chain-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  background: var(--bg-tertiary);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.chain-input-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-grow: 1;
+  max-width: 500px;
+}
+
+.terminal-input {
+  flex-grow: 1;
+  background: var(--bg-code-block);
+  border: 1px solid var(--border-strong);
+  color: var(--text-bright);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.terminal-input:focus {
+  border-color: var(--phosphor-green);
+  box-shadow: 0 0 8px rgba(63, 185, 80, 0.25);
+}
+
+.chain-controls-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+/* Chain Blocks Flow Container */
+.chain-scroll-viewport {
+  overflow-x: auto;
+  padding: var(--space-sm) 0 var(--space-md);
+}
+
+.chain-track {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-md);
+  min-width: max-content;
+}
+
+.block-card {
+  width: 320px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  position: relative;
+  transition: all var(--transition-smooth);
+}
+
+.block-card.valid {
+  border-color: rgba(63, 185, 80, 0.4);
+}
+
+.block-card.tampered {
+  border-color: var(--phosphor-red);
+  background: rgba(248, 81, 73, 0.05);
+  box-shadow: 0 0 20px rgba(248, 81, 73, 0.2);
+}
+
+.block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.4rem;
+}
+
+.block-num {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--phosphor-green);
+}
+
+.block-card.tampered .block-num {
+  color: var(--phosphor-red);
+}
+
+.block-timestamp {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.block-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.field-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.field-value {
+  font-size: 0.8rem;
+  color: var(--text-main);
+  background: var(--bg-code-block);
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.field-value.hash-text {
+  font-family: var(--font-mono);
+  color: var(--phosphor-cyan);
+}
+
+.block-card.tampered .field-value.hash-text {
+  color: var(--phosphor-red);
+}
+
+.chain-link-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--phosphor-green);
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.chain-link-arrow.broken {
+  color: var(--phosphor-red);
+}
+
+/* ==========================================================================
+   SMART CONTRACTS (VENDING MACHINE METAPHOR)
+   ========================================================================== */
+
+.smart-contracts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.code-terminal-pane {
+  background: var(--bg-code-block);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-panel);
+}
+
+.solidity-code {
+  padding: var(--space-md);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  overflow-x: auto;
+}
+
+.solidity-code .code-line {
+  display: block;
+  padding: 0 4px;
+  border-radius: 2px;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.solidity-code .code-line.active {
+  background: rgba(63, 185, 80, 0.25);
+  color: #fff;
+  border-left: 3px solid var(--phosphor-green);
+}
+
+.syn-keyword { color: #ff7b72; font-weight: 600; }
+.syn-type { color: #79c0ff; }
+.syn-func { color: #d2a8ff; }
+.syn-string { color: #a5d6ff; }
+.syn-comment { color: #8b949e; font-style: italic; }
+.syn-number { color: #79c0ff; }
+
+/* Vending Machine UI */
+.vending-interface {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.vending-shelf {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+}
+
+.vending-item-btn {
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md) var(--space-xs);
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.vending-item-btn:hover {
+  border-color: var(--border-strong);
+}
+
+.vending-item-btn.selected {
+  border-color: var(--phosphor-green);
+  background: rgba(63, 185, 80, 0.1);
+  box-shadow: 0 0 12px rgba(63, 185, 80, 0.2);
+}
+
+.item-icon {
+  font-size: 1.75rem;
+}
+
+.item-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+.item-price {
+  font-size: 0.75rem;
+  color: var(--phosphor-cyan);
+}
+
+.vending-payment-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  background: var(--bg-tertiary);
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+}
+
+.payment-eth-display {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--phosphor-green);
+}
+
+/* ==========================================================================
+   CRYPTOCURRENCIES & GAS ESTIMATOR SECTION
+   ========================================================================== */
+
+.crypto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+}
+
+.comparison-table-wrap {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.compare-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: var(--space-xs);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+}
+
+.compare-header {
+  font-weight: 700;
+  color: var(--text-bright);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Gas Simulator Box */
+.gas-calc-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.gas-selector-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.gas-pill-options {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.btn-pill-choice {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-pill-choice.active {
+  background: rgba(88, 166, 255, 0.15);
+  border-color: var(--phosphor-cyan);
+  color: var(--phosphor-cyan);
+  font-weight: 600;
+}
+
+.gas-calc-readout {
+  background: var(--bg-code-block);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.gas-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px dashed var(--border-strong);
+  padding-top: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.gas-total-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--phosphor-amber);
+}
+
+/* ==========================================================================
+   NFTS (NON-FUNGIBLE TOKENS) & PROVENANCE
+   ========================================================================== */
+
+.nft-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.nft-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+.nft-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+}
+
+.nft-visual-window {
+  background: var(--bg-code-block);
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.ascii-art {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  line-height: 1.1;
+  color: var(--phosphor-green);
+  text-align: center;
+  white-space: pre;
+  user-select: none;
+}
+
+.nft-card-body {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.nft-meta-raw {
+  background: var(--bg-code-block);
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  max-height: 110px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  border: 1px solid var(--border-subtle);
+}
+
+/* ==========================================================================
+   DAOS (DECENTRALIZED AUTONOMOUS ORGANIZATIONS)
+   ========================================================================== */
+
+.dao-governance-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-panel);
+}
+
+.dao-status-bar {
+  background: var(--bg-tertiary);
+  padding: 0.75rem var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+}
+
+.proposals-list {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.proposal-item {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.proposal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.quorum-bar-track {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-primary);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+}
+
+.quorum-fill-yes {
+  height: 100%;
+  background: var(--phosphor-green);
+  transition: width var(--transition-smooth);
+}
+
+.quorum-fill-no {
+  height: 100%;
+  background: var(--phosphor-red);
+  transition: width var(--transition-smooth);
+}
+
+.voting-btn-group {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   FACT CAROUSEL (TERMINAL LOG EXPLORER)
+   ========================================================================== */
+
+.carousel-container {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-viewport {
+  position: relative;
+  min-height: 200px;
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  align-items: center;
+}
+
+.fact-slide {
+  display: none;
+  width: 100%;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.fact-slide.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fact-badge {
+  font-size: 0.75rem;
+  color: var(--phosphor-amber);
+  margin-bottom: var(--space-xs);
+}
+
+.fact-headline {
+  font-size: 1.35rem;
+  margin-bottom: var(--space-xs);
+  color: var(--text-bright);
+}
+
+.fact-description {
+  color: var(--text-main);
+  font-size: 0.95rem;
+  line-height: var(--leading-relaxed);
+  max-width: var(--max-ch);
+}
+
+.carousel-controls {
+  padding: 0.75rem var(--space-lg);
+  background: var(--bg-tertiary);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-strong);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.carousel-dot.active {
+  background: var(--phosphor-green);
+  transform: scale(1.2);
+}
+
+/* ==========================================================================
+   WALLET PLAYGROUND (EIP-1193)
+   ========================================================================== */
+
+.wallet-console-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.wallet-card-main {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.wallet-status-banner {
+  padding: var(--space-md);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wallet-details-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wallet-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+}
+
+.wallet-row-label {
+  color: var(--text-muted);
+}
+
+.wallet-row-val {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+.sim-switch-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.site-footer {
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+  padding: var(--space-2xl) 0 var(--space-xl);
+  margin-top: var(--space-3xl);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-xl);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.footer-disclaimer {
+  padding: var(--space-md);
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--phosphor-amber);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--text-main);
+  margin-top: var(--space-sm);
+}
+
+.footer-col-title {
+  color: var(--text-bright);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.8rem;
+}
