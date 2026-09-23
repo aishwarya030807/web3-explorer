@@ -1,5 +1,8 @@
 # 🟢 WEB3_TERMINAL // Interactive Decentralized Explorer
 
+** Live Demo:** https://aishwarya030807.github.io/web3-explorer/
+** Repository:** https://github.com/aishwarya030807/web3-explorer
+
 An interactive, responsive, retro terminal-styled exploratory landing page designed to teach beginners foundational Web3 concepts through hands-on visuals, simulations, and real-time interactions rather than passive reading.
 
 Built for the **Web3 Explorer Challenge** with zero external frontend runtime dependencies.
@@ -7,8 +10,9 @@ Built for the **Web3 Explorer Challenge** with zero external frontend runtime de
 ---
 
 ## 🚀 Live Demo & Repository
-- **Local Entry Point**: Open [`index.html`](index.html) directly in any modern web browser or serve via a local HTTP server.
-- **Repository URL**: `https://github.com/aishwarya030807/web3-explorer`
+**Live Demo:** https://aishwarya030807.github.io/web3-explorer/
+**Repository URL:** https://github.com/aishwarya030807/web3-explorer
+**Local Entry Point:** Open `index.html` directly in any modern web browser or serve via a local HTTP server
 
 ---
 
