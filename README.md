@@ -8,7 +8,7 @@ Built for the **Web3 Explorer Challenge** with zero external frontend runtime de
 
 ## 🚀 Live Demo & Repository
 - **Local Entry Point**: Open [`index.html`](index.html) directly in any modern web browser or serve via a local HTTP server.
-- **Repository URL**: `https://github.com/web3-terminal-explorer`
+- **Repository URL**: `https://github.com/aishwarya030807/web3-explorer`
 
 ---
 
